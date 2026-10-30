@@ -30,6 +30,7 @@ function checkError(error, data, res, message) {
     });
 });
 
+// eras and galleries
 app.get('/api/eras', async (req, res) => {
     const {data, error} = await supabase
     .from('eras')
@@ -62,6 +63,7 @@ app.get('/api/galleries/country/:substring', async (req, res) => {
     res.send(data);
 }); 
 
+// artists
 app.get('/api/artists/', async (req, res) => {
     const {data, error} = await supabase
     .from('artists')
@@ -96,6 +98,7 @@ app.get('/api/artists/country/:substring', async (req, res) => {
     res.send(data);
 });
 
+// genres
 app.get('/api/genres/', async (req, res) => {
     const {data, error} = await supabase
     .from('genres')
@@ -132,6 +135,7 @@ app.get('/api/genres/painting/:ref', async (req, res) => {
     res.json(data);
 });
 
+// paintings
 app.get('/api/paintings/single/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('paintings')
@@ -260,7 +264,7 @@ app.get('/api/paintings/era/:ref', async (req, res) => {
     res.send(data);
 });
 
-
+// counts
 async function genreCounts() {
     const {data, error} = await supabase
     .from('genres')
@@ -275,14 +279,6 @@ app.get('/api/counts/genres', async (req, res) => {
     res.send(counts.sort((a, b) => a.count - b.count));
 });
 
-app.get('/api/counts/topgenres/:ref', async (req, res) => {
-    const { counts, error } = await genreCounts();
-    if (error) return checkError(error, counts, res, '');
-    const top = counts.filter(g => g.count > Number(req.params.ref)).sort((a, b) => b.count - a.count);
-    if (checkError(null, top, res, 'No genres found with that many paintings')) return;
-    res.send(top);
-});
-
 app.get('/api/counts/artists', async (req, res) => {
     const {data, error} = await supabase
     .from('artists')
@@ -294,6 +290,14 @@ app.get('/api/counts/artists', async (req, res) => {
     res.send(counts);
 });
 
+app.get('/api/counts/topgenres/:ref', async (req, res) => {
+    const { counts, error } = await genreCounts();
+    if (error) return checkError(error, counts, res, '');
+    const top = counts.filter(g => g.count > Number(req.params.ref)).sort((a, b) => b.count - a.count);
+    if (checkError(null, top, res, 'No genres found with that many paintings')) return;
+    res.send(top);
+});
+
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 
 if (require.main === module) {
@@ -302,7 +306,7 @@ if (require.main === module) {
         const base = `http://localhost:${PORT}`;
         console.log(`listening on port ${PORT}`);
 
-        // eras, galleries
+        // eras and galleries
         console.log(`${base}/api/eras`);
         console.log(`${base}/api/galleries`);
         console.log(`${base}/api/galleries/30`);
