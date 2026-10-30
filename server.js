@@ -1,6 +1,7 @@
 const express = require('express');
 const supa = require('@supabase/supabase-js');
 const app = express();
+module.exports = app;
 
 const supaUrl = 'https://iyjjvwlwbfiejvppldia.supabase.co';
 const supaAnonKey = 'sb_publishable_JD9rQxZXomUYpSjYM0sziw_F1peEaXI';
@@ -289,17 +290,64 @@ app.get('/api/counts/artists', async (req, res) => {
     if (checkError(error, data, res, 'No artists found')) return;
     const counts = data
         .map(a => ({ artistName: `${a.firstName} ${a.lastName}`, count: a.paintings[0].count }))
-        .sort((a, b) => b.count - a.count);                    // most -> fewest
+        .sort((a, b) => b.count - a.count);
     res.send(counts);
 });
 
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 
-app.listen(8080, () => {
-    const base = `http://localhost:8080`;
-    console.log('listening on port 8080');
+if (require.main === module) {
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+        const base = `http://localhost:${PORT}`;
+        console.log(`listening on port ${PORT}`);
 
-    console.log(`${base}/api/paintings/sort/year/limit`);
-    console.log(`${base}/api/paintings/sort/year/limit/10/skip`);
-    console.log(`${base}/api/paintings/era/2`);
-}); 
+        // eras, galleries
+        console.log(`${base}/api/eras`);
+        console.log(`${base}/api/galleries`);
+        console.log(`${base}/api/galleries/30`);
+        console.log(`${base}/api/galleries/calgary`);
+        console.log(`${base}/api/galleries/country/fra`);
+
+        // artists
+        console.log(`${base}/api/artists`);
+        console.log(`${base}/api/artists/12`);
+        console.log(`${base}/api/artists/1223423`);
+        console.log(`${base}/api/artists/search/ma`);
+        console.log(`${base}/api/artists/search/mA`);
+        console.log(`${base}/api/artists/country/fra`);
+
+        // genres
+        console.log(`${base}/api/genres`);
+        console.log(`${base}/api/genres/76`);
+        console.log(`${base}/api/genres/painting/408`);
+        console.log(`${base}/api/genres/painting/jsdfhg`);
+
+        // paintings
+        console.log(`${base}/api/paintings/single/63`);
+        console.log(`${base}/api/paintings/sort/title/limit/10`);
+        console.log(`${base}/api/paintings/sort/year/limit/10`);
+        console.log(`${base}/api/paintings/sort/absd/limit/10`);
+        console.log(`${base}/api/paintings/sort/year/limit/asd`);
+        console.log(`${base}/api/paintings/sort/year/limit`);
+        console.log(`${base}/api/paintings/sort/year/limit/10/skip/30`);
+        console.log(`${base}/api/paintings/sort/year/limit/10/skip/30000`);
+        console.log(`${base}/api/paintings/sort/year/limit/10/skip`);
+        console.log(`${base}/api/paintings/search/port`);
+        console.log(`${base}/api/paintings/search/pORt`);
+        console.log(`${base}/api/paintings/search/connolly`);
+        console.log(`${base}/api/paintings/years/1800/1850`);
+        console.log(`${base}/api/paintings/years/1850/1800`);
+        console.log(`${base}/api/paintings/galleries/5`);
+        console.log(`${base}/api/paintings/artist/16`);
+        console.log(`${base}/api/paintings/artist/666`);
+        console.log(`${base}/api/paintings/genre/78`);
+        console.log(`${base}/api/paintings/era/2`);
+
+        // counts
+        console.log(`${base}/api/counts/genres`);
+        console.log(`${base}/api/counts/artists`);
+        console.log(`${base}/api/counts/topgenres/20`);
+        console.log(`${base}/api/counts/topgenres/2034958`);
+    });
+}
