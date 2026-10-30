@@ -1,3 +1,81 @@
+# Markdown syntax guide
+
+## Headers
+
+# This is a Heading h1
+## This is a Heading h2
+###### This is a Heading h6
+
+## Emphasis
+
+*This text will be italic*  
+_This will also be italic_
+
+**This text will be bold**  
+__This will also be bold__
+
+_You **can** combine them_
+
+## Lists
+
+### Unordered
+
+* Item 1
+* Item 2
+* Item 2a
+* Item 2b
+    * Item 3a
+    * Item 3b
+
+### Ordered
+
+1. Item 1
+2. Item 2
+3. Item 3
+    1. Item 3a
+    2. Item 3b
+
+## Images
+
+![This is an alt text.](/image/Markdown-mark.svg "This is a sample image.")
+
+## Links
+
+You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
+
+## Blockquotes
+
+> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
+>
+>> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+## Tables
+
+| Left columns  | Right columns |
+| ------------- |:-------------:|
+| left foo      | right foo     |
+| left bar      | right bar     |
+| left baz      | right baz     |
+
+## Blocks of code
+
+```
+let message = 'Hello world';
+alert(message);
+```
+
+## Mermaid diagrams
+```mermaid
+graph TD
+  A[Start] --> B{Decision}
+  B -->|Yes| C[Finish]
+  B -->|No| D[Alternate]
+```
+
+## Inline code
+
+This web site is using `markedjs/marked`.
+
 # Art Database API
 ## Overview
 
@@ -12,6 +90,8 @@ This Node API fetches data about various artists, paintings, galleries, eras, an
 
 ## API Endpoints
  
+| Endpoint  | Description |
+| ------------- |:-------------:|
 | `/api/eras` | Get all eras |
 | `/api/galleries` | Get all galleries |
 | `/api/galleries/:ref` | Get a gallery by reference |
@@ -38,14 +118,14 @@ This Node API fetches data about various artists, paintings, galleries, eras, an
 
 ## Test Links
  
-**Eras and galleries**
+### Eras and galleries
  
 - [/api/eras](https://comp4513-assig1.vercel.app/api/eras)
 - [/api/galleries](https://comp4513-assig1.vercel.app/api/galleries)
 - [/api/galleries/30](https://comp4513-assig1.vercel.app/api/galleries/30)
 - [/api/galleries/calgary](https://comp4513-assig1.vercel.app/api/galleries/calgary)
 - [/api/galleries/country/fra](https://comp4513-assig1.vercel.app/api/galleries/country/fra)
-**Artists**
+### Artists
  
 - [/api/artists](https://comp4513-assig1.vercel.app/api/artists)
 - [/api/artists/12](https://comp4513-assig1.vercel.app/api/artists/12)
@@ -53,13 +133,13 @@ This Node API fetches data about various artists, paintings, galleries, eras, an
 - [/api/artists/search/ma](https://comp4513-assig1.vercel.app/api/artists/search/ma)
 - [/api/artists/search/mA](https://comp4513-assig1.vercel.app/api/artists/search/mA)
 - [/api/artists/country/fra](https://comp4513-assig1.vercel.app/api/artists/country/fra)
-**Genres**
+### Genres
  
 - [/api/genres](https://comp4513-assig1.vercel.app/api/genres)
 - [/api/genres/76](https://comp4513-assig1.vercel.app/api/genres/76)
 - [/api/genres/painting/408](https://comp4513-assig1.vercel.app/api/genres/painting/408)
 - [/api/genres/painting/jsdfhg](https://comp4513-assig1.vercel.app/api/genres/painting/jsdfhg)
-**Paintings**
+### Paintings
  
 - [/api/paintings/single/63](https://comp4513-assig1.vercel.app/api/paintings/single/63)
 - [/api/paintings/sort/title/limit/10](https://comp4513-assig1.vercel.app/api/paintings/sort/title/limit/10)
@@ -80,7 +160,7 @@ This Node API fetches data about various artists, paintings, galleries, eras, an
 - [/api/paintings/artist/666](https://comp4513-assig1.vercel.app/api/paintings/artist/666)
 - [/api/paintings/genre/78](https://comp4513-assig1.vercel.app/api/paintings/genre/78)
 - [/api/paintings/era/2](https://comp4513-assig1.vercel.app/api/paintings/era/2)
-**Counts**
+### Counts
  
 - [/api/counts/genres](https://comp4513-assig1.vercel.app/api/counts/genres)
 - [/api/counts/artists](https://comp4513-assig1.vercel.app/api/counts/artists)
